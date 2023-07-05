@@ -308,7 +308,7 @@
                 </ul>
             </section>
     }
-    const MainDevicesSection = ({onClick, onSelectInput, activeTab, ref, hasRightScroll}) => {
+    const MainDevicesSection = ({onClick, onSelectInput, onSize, activeTab, refff, hasRightScroll}) => {
         const options = React.useMemo(
         () => TABS_KEYS.map(key =>
                 <option key={key} value={key}>
@@ -348,7 +348,7 @@
                     {ul}
                 </div>
 
-                <div className="section__panel-wrapper" ref={ref}>
+                <div className="section__panel-wrapper" ref={refff}>
                     {TABS_KEYS.map(key =>
                         <div key={key} role="tabpanel" className={'section__panel' + (key === activeTab ? '' : ' section__panel_hidden')} aria-hidden={key === activeTab ? 'false' : 'true'} id={`panel_${key}`} aria-labelledby={`tab_${key}`}>
                             <ul className="section__panel-list">
@@ -414,7 +414,7 @@
         return <main className="main">
             <MainGeneralSection />
             <ScriptsSection />
-            <MainDevicesSection onClick={onArrowCLick} onSelectInpu={onSelectInput} activeTab={activeTab} ref={ref} hasRightScroll={hasRightScroll}/>
+            <MainDevicesSection onClick={onArrowCLick} onSize={onSize} onSelectInpu={onSelectInput} activeTab={activeTab} refff={ref} hasRightScroll={hasRightScroll}/>
         </main>;
     }
 
