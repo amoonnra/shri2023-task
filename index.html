@@ -42,7 +42,7 @@
         © 1997–2023 ООО «Яндекс»
     </div>
 </footer>
-<script src="vendors/react-with-dom.js"></script>
+<script src="vendors/react-with-dom.js" defer></script>
 <script src="vendors/babel.min.js"></script>
 <script type="text/babel">
     const TABS = {
@@ -199,7 +199,7 @@
             }
         });
 
-        return React.memo(<li ref={ref} className={'event' + (props.slim ? ' event_slim' : '')}>
+        return <li ref={ref} className={'event' + (props.slim ? ' event_slim' : '')}>
             <button className="event__button">
                 <span className={`event__icon event__icon_${props.icon}`} role="img" aria-label={props.iconLabel}></span>
                 <h4 className="event__title">{props.title}</h4>
@@ -207,7 +207,7 @@
                     <span className="event__subtitle">{props.subtitle}</span>
                 }
             </button>
-        </li>);
+        </li>;
     }
 
     
@@ -217,7 +217,7 @@
     const TABS_KEYS = Object.keys(TABS);
 
     const MainGeneralSection = () => {
-        return React.memo(<section className="section main__general">
+        return <section className="section main__general">
                 <h2 className="section__title section__title-header section__main-title">Главное</h2>
                 <div className="hero-dashboard">
                     <div className="hero-dashboard__primary">
@@ -267,10 +267,10 @@
                         />
                     </ul>
                 </div>
-            </section>)
+            </section>
     }
     const ScriptsSection = () => {
-        return React.memo(<section className="section main__scripts">
+        return <section className="section main__scripts">
                 <h2 className="section__title section__title-header">Избранные сценарии</h2>
 
                 <ul className="event-grid">
@@ -306,7 +306,7 @@
                         title="Сделать пол тёплым во всей квартире"
                     />
                 </ul>
-            </section>)
+            </section>
     }
     const MainDevicesSection = ({onClick, onSelectInput, onSize, activeTab, setActiveTab , refff, hasRightScroll}) => {
         const options = React.useMemo(
@@ -419,6 +419,7 @@
     }
 
   
+    setTimeout(() => {
         const root = ReactDOM.createRoot(document.getElementById('app'));
         root.render(
             <>
@@ -426,6 +427,7 @@
                 <Main />
             </>
         );
+    }, 100);
    
 </script>
 
