@@ -5,7 +5,6 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <title>Яндекс.Дом</title>
-    <link rel="preload" as="font" href="assets/lato.woff2" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" as="image" href="assets/bg@2x.webp" />
     <style>
         a,body,details,div,footer,h1,h2,h3,h4,h5,h6,header,html,i,img,label,li,menu,object,p,s,section,span,ul{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}details,footer,header,menu,section{display:block}body{line-height:1}ul{list-style:none}
@@ -415,11 +414,11 @@
         return <main className="main">
             <MainGeneralSection />
             <ScriptsSection />
-            <MainDevicesSection onClick={onClick} onSelectInpu={onSelectInput} activeTab={activeTab} ref={ref} hasRightScroll={hasRightScroll}/>
+            <MainDevicesSection onClick={onArrowCLick} onSelectInpu={onSelectInput} activeTab={activeTab} ref={ref} hasRightScroll={hasRightScroll}/>
         </main>;
     }
 
-    setTimeout(() => {
+  
         const root = ReactDOM.createRoot(document.getElementById('app'));
         root.render(
             <>
@@ -427,7 +426,7 @@
                 <Main />
             </>
         );
-    }, 100);
+   
 </script>
 
 </body>
