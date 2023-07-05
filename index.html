@@ -199,7 +199,7 @@
             }
         });
 
-        return <li ref={ref} className={'event' + (props.slim ? ' event_slim' : '')}>
+        return React.memo(<li ref={ref} className={'event' + (props.slim ? ' event_slim' : '')}>
             <button className="event__button">
                 <span className={`event__icon event__icon_${props.icon}`} role="img" aria-label={props.iconLabel}></span>
                 <h4 className="event__title">{props.title}</h4>
@@ -207,7 +207,7 @@
                     <span className="event__subtitle">{props.subtitle}</span>
                 }
             </button>
-        </li>;
+        </li>);
     }
 
     
@@ -217,7 +217,7 @@
     const TABS_KEYS = Object.keys(TABS);
 
     const MainGeneralSection = () => {
-        return <section className="section main__general">
+        return React.memo(<section className="section main__general">
                 <h2 className="section__title section__title-header section__main-title">Главное</h2>
                 <div className="hero-dashboard">
                     <div className="hero-dashboard__primary">
@@ -267,10 +267,10 @@
                         />
                     </ul>
                 </div>
-            </section>
+            </section>)
     }
     const ScriptsSection = () => {
-        return <section className="section main__scripts">
+        return React.memo(<section className="section main__scripts">
                 <h2 className="section__title section__title-header">Избранные сценарии</h2>
 
                 <ul className="event-grid">
@@ -306,7 +306,7 @@
                         title="Сделать пол тёплым во всей квартире"
                     />
                 </ul>
-            </section>
+            </section>)
     }
     const MainDevicesSection = ({onClick, onSelectInput, onSize, activeTab, setActiveTab , refff, hasRightScroll}) => {
         const options = React.useMemo(
@@ -335,7 +335,7 @@
                     </ul>,
     [TABS_KEYS])
 
-        return <section className="section main__devices">
+        return React.memo(<section className="section main__devices">
                 <div className="section__title">
                     <h2 className="section__title-header">
                         Избранные устройства
@@ -366,7 +366,7 @@
                         <div className="section__arrow" onClick={onClick}></div>
                     }
                 </div>
-            </section>
+            </section>)
     }
 
     function Main() {
@@ -411,11 +411,11 @@
             }
         };
 
-        return <main className="main">
+        return React.memo(<main className="main">
             <MainGeneralSection />
             <ScriptsSection />
             <MainDevicesSection setActiveTab={setActiveTab } onClick={onArrowCLick} onSize={onSize} onSelectInpu={onSelectInput} activeTab={activeTab} refff={ref} hasRightScroll={hasRightScroll}/>
-        </main>;
+        </main>);
     }
 
   
