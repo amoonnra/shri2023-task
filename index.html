@@ -335,7 +335,7 @@
                     </ul>,
     [TABS_KEYS])
 
-        return React.memo(<section className="section main__devices">
+        return <section className="section main__devices">
                 <div className="section__title">
                     <h2 className="section__title-header">
                         Избранные устройства
@@ -366,7 +366,7 @@
                         <div className="section__arrow" onClick={onClick}></div>
                     }
                 </div>
-            </section>)
+            </section>
     }
 
     function Main() {
@@ -411,11 +411,11 @@
             }
         };
 
-        return React.memo(<main className="main">
+        return <main className="main">
             <MainGeneralSection />
             <ScriptsSection />
             <MainDevicesSection setActiveTab={setActiveTab } onClick={onArrowCLick} onSize={onSize} onSelectInpu={onSelectInput} activeTab={activeTab} refff={ref} hasRightScroll={hasRightScroll}/>
-        </main>);
+        </main>;
     }
 
   
