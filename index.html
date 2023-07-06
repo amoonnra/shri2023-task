@@ -247,9 +247,11 @@
                 setHasRightScroll(newHasRightScroll);
             }
         });
-
+        const realTabs = TABS.slice(0, 10);
         const onArrowCLick = () => {
             const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
+            const last = realTabs.length
+            realTabs.push(TABS.slice(last, last + 4))
             if (scroller) {
                 scroller.scrollTo({
                     left: scroller.scrollLeft + 400,
@@ -257,7 +259,7 @@
                 });
             }
         };
-
+        
         return <main className="main">
             <section className="section main__general">
                 <h2 className="section__title section__title-header section__main-title">Главное</h2>
@@ -385,7 +387,7 @@
                     {TABS_KEYS.map(key =>
                         <div key={key} role="tabpanel" className={'section__panel' + (key === activeTab ? '' : ' section__panel_hidden')} aria-hidden={key === activeTab ? 'false' : 'true'} id={`panel_${key}`} aria-labelledby={`tab_${key}`}>
                             <ul className="section__panel-list">
-                                {TABS[key].items.map((item, index) =>
+                                {realTabs[key].items.map((item, index) =>
                                     <Event
                                         key={index}
                                         {...item}
