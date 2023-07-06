@@ -247,8 +247,8 @@
                 setHasRightScroll(newHasRightScroll);
             }
         });
-        const realTabs = {...TABS.kitchen, ...TABS.hall, ...TABS.cameras, ...TABS.lights, 
-            all: {
+        const realTabs = {kitchen: TABS.kitchen, hall: TABS.hall, cameras: TABS.cameras, lights: TABS.lights, 
+                all: {
             title: 'Все',
             items: [...TABS.all.items.slice(0, 10)]
         }
