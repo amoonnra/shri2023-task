@@ -247,9 +247,12 @@
                 setHasRightScroll(newHasRightScroll);
             }
         });
-        const realTabs = {...TABS.kitchen, ...TABS.hall, ...TABS.cameras, ...TABS.lights, all: {
+        const realTabs = {...TABS.kitchen, ...TABS.hall, ...TABS.cameras, ...TABS.lights, 
+            all: {
             title: 'Все',
-            items: [...TABS.all.items.slice(0, 10)]} } 
+            items: [...TABS.all.items.slice(0, 10)]
+        }
+         } 
         const onArrowCLick = () => {
             const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
             const last = realTabs.all.items.length
