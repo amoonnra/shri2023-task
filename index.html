@@ -247,11 +247,11 @@
                 setHasRightScroll(newHasRightScroll);
             }
         });
-        const realTabs = TABS.slice(0, 10);
+        const realTabs = {...TABS.kitchen, ...TABS.hall, ...TABS.cameras, ...TABS.lights, ...TABS.all.slice(0, 10)} 
         const onArrowCLick = () => {
             const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
             const last = realTabs.length
-            realTabs.push(TABS.slice(last, last + 4))
+            realTabs.all.push(TABS.all.slice(last, last + 4))
             if (scroller) {
                 scroller.scrollTo({
                     left: scroller.scrollLeft + 400,
