@@ -248,8 +248,7 @@
             }
         });
         const [realTabs, setRealTabs] = React.useState(
-        {kitchen: TABS.kitchen, hall: TABS.hall, cameras: TABS.cameras, lights: TABS.lights, 
-                all: {
+        {all: {
             title: 'Все',
             items: [...TABS.all.items.slice(0, 16)]
         }
@@ -388,7 +387,9 @@
                                 className={'section__tab' + (key === activeTab ? ' section__tab_active' : '')}
                                 id={`tab_${key}`}
                                 aria-controls={`panel_${key}`}
-                                onClick={() => setActiveTab(key)}
+                                onClick={() => {
+                                    setRealTabs({...realTabs, [key]: TABS[key]})
+                                    setActiveTab(key)}}
                             >
                                 {TABS[key].title}
                             </li>
