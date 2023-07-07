@@ -296,7 +296,10 @@
         const initedRef = React.useRef(false);
         const [activeTab, setActiveTab] = React.useState('');
         const [hasRightScroll, setHasRightScroll] = React.useState(false);
-
+        const [real, setReal] = React.useState(
+            {all: {title: TABS.all.title, items: TABS.all.items.slice(0, 16)}, kitchen: TABS.kitchen, hall: TABS.hall, lights: TABS.lights, cameras: TABS.cameras}
+        )
+        TABS
         React.useEffect(() => {
             if (!activeTab && !initedRef.current) {
                 initedRef.current = true;
@@ -321,7 +324,13 @@
 
         const onArrowCLick = () => {
             const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
-            
+            setReal({
+                ...real,
+                [activeTab]: {
+                    title: TABS[activeTab].title,
+                    items: TABS[activeTab].items.slice(0, real[activeTab].items.length + 5)
+                }
+            })
             if (scroller) {
                 scroller.scrollTo({
                     left: scroller.scrollLeft + 400,
@@ -365,7 +374,7 @@
                     {TABS_KEYS.map(key =>
                         <div key={key} role="tabpanel" className={'section__panel' + (key === activeTab ? '' : ' section__panel_hidden')} aria-hidden={key === activeTab ? 'false' : 'true'} id={`panel_${key}`} aria-labelledby={`tab_${key}`}>
                             <ul className="section__panel-list">
-                                {TABS[key].items.map((item, index) =>
+                                {real[key].items.map((item, index) =>
                                     <Event
                                         key={index}
                                         {...item}
