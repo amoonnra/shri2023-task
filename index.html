@@ -203,76 +203,7 @@
         </li>;
     }
 
-   
-
-    function Main() {
-        const ref = React.useRef();
-        const initedRef = React.useRef(false);
-        const [activeTab, setActiveTab] = React.useState('');
-        const [hasRightScroll, setHasRightScroll] = React.useState(false);
-
-        React.useEffect(() => {
-            if (!activeTab && !initedRef.current) {
-                initedRef.current = true;
-                setActiveTab(new URLSearchParams(location.search).get('tab') || 'all');
-            }
-        });
-
-        const onSelectInput = event => {
-            setActiveTab(event.target.value);
-        };
-
-    
-        React.useEffect(() => {
-            const sumWidth = TABS[activeTab || 'all']?.items.length * 200;
-            const sumHeight = TABS[activeTab || 'all']?.items.length * 120;
-
-            const newHasRightScroll = sumWidth > ref.current.offsetWidth;
-            if (newHasRightScroll !== hasRightScroll) {
-                setHasRightScroll(newHasRightScroll);
-            }
-        }, [activeTab]);
-
-        const [realTabs, setRealTabs] = React.useState(
-        {kitchen: TABS.kitchen, hall: TABS.hall, cameras: TABS.cameras, lights: TABS.lights, 
-                all: {
-            title: 'Все',
-            items: [...TABS.all.items.slice(0, 26)]
-        }
-         } )
-        const onArrowCLick = () => {
-            const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
-            const last = realTabs.all.items.length
-            
-            setRealTabs(() => {
-                const neww = {...realTabs,  all: {
-            title: 'Все',
-            items: [...TABS.all.items.slice(0, last + 4)]
-        }} 
-                return neww
-            })
-            if (scroller) {
-                scroller.scrollTo({
-                    left: scroller.scrollLeft + 400,
-                    behavior: 'smooth'
-                });
-            }
-        };
-        const childs = React.useMemo(() => {
-            return <>{TABS_KEYS.map(key =>
-                        <div key={key} role="tabpanel" className={'section__panel' + (key === activeTab ? '' : ' section__panel_hidden')} aria-hidden={key === activeTab ? 'false' : 'true'} id={`panel_${key}`} aria-labelledby={`tab_${key}`}>
-                            <ul className="section__panel-list">
-                                {TABS[key].items.map((item, index) =>
-                                    <Event
-                                        key={index}
-                                        {...item}
-                                    />
-                                )}
-                            </ul>
-                        </div>
-                    )}</>
-        }, [TABS])
-        const header = () =>  <section className="section main__general">
+    const Header = () =>  <section className="section main__general">
                 <h2 className="section__title section__title-header section__main-title">Главное</h2>
                 <div className="hero-dashboard">
                     <div className="hero-dashboard__primary">
@@ -323,7 +254,7 @@
                     </ul>
                 </div>
             </section>
-            const favs = () => <section className="section main__scripts">
+            const Favs = () => <section className="section main__scripts">
                 <h2 className="section__title section__title-header">Избранные сценарии</h2>
 
                 <ul className="event-grid">
@@ -360,12 +291,46 @@
                     />
                 </ul>
             </section>
-        return <main className="main">
-           
-            <header />
-            <favs />
+            const All = () => {
+                const ref = React.useRef();
+        const initedRef = React.useRef(false);
+        const [activeTab, setActiveTab] = React.useState('');
+        const [hasRightScroll, setHasRightScroll] = React.useState(false);
 
-            <section className="section main__devices">
+        React.useEffect(() => {
+            if (!activeTab && !initedRef.current) {
+                initedRef.current = true;
+                setActiveTab(new URLSearchParams(location.search).get('tab') || 'all');
+            }
+        }, [activeTab, initedRef.current]);
+
+        const onSelectInput = event => {
+            setActiveTab(event.target.value);
+        };
+
+    
+        React.useEffect(() => {
+            const sumWidth = TABS[activeTab || 'all']?.items.length * 200;
+            const sumHeight = TABS[activeTab || 'all']?.items.length * 120;
+
+            const newHasRightScroll = sumWidth > ref.current.offsetWidth;
+            if (newHasRightScroll !== hasRightScroll) {
+                setHasRightScroll(newHasRightScroll);
+            }
+        }, [activeTab]);
+
+        const onArrowCLick = () => {
+            const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
+            const last = realTabs.all.items.length
+            
+            if (scroller) {
+                scroller.scrollTo({
+                    left: scroller.scrollLeft + 400,
+                    behavior: 'smooth'
+                });
+            }
+        };
+        return  <section className="section main__devices">
                 <div className="section__title">
                     <h2 className="section__title-header">
                         Избранные устройства
@@ -415,6 +380,17 @@
                     }
                 </div>
             </section>
+            }
+
+    function Main() {
+        
+       
+        return <main className="main">
+           
+            <Header />
+            <Favs />
+            <All />
+           
         </main>;
     }
 
