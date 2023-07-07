@@ -222,14 +222,10 @@
             setActiveTab(event.target.value);
         };
 
-        let sizes = [];
-        const onSize = size => {
-            sizes = [...sizes, size];
-        };
-
+    
         React.useEffect(() => {
-            const sumWidth = TABS[activeTab].items.length * 200;
-            const sumHeight = TABS[activeTab].items.length * 120;
+            const sumWidth = TABS[activeTab || 'all']?.items.length * 200;
+            const sumHeight = TABS[activeTab || 'all']?.items.length * 120;
 
             const newHasRightScroll = sumWidth > ref.current.offsetWidth;
             if (newHasRightScroll !== hasRightScroll) {
